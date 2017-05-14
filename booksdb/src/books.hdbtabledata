@@ -1,0 +1,11 @@
+{ 
+  "format_version": 1, 
+  "imports": 
+  [ { 
+		"target_table": "bookstore.db::store.Book", 
+		"source_data" : { "data_type" : "CSV", "file_name" : "bookstore.db::books.csv", "has_header" : true }, 
+		"import_settings" : { "import_columns" : [ "bookId", "bookName", "authorId","isbn","price","priceCurrency" ] }, 
+		"column_mappings" : { "bookId" : 1, "bookName" : 2, "authorId": 3, "isbn" : 4, "price": 5, "priceCurrency" : 6 	} 
+	} 
+  ] 
+}

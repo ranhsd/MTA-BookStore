@@ -1,0 +1,38 @@
+_schema-version: 2.0.0
+ID: bookstore
+version: 1.0.3
+modules:
+  - name: booksdb
+    type: hdb
+    path: booksdb
+    requires:
+      - name: bookstore_db
+  - name: booksjs
+    type: nodejs
+    path: booksjs
+    requires:
+      - name: booksdb
+      - name: bookstore_db
+    provides:
+      - name: tinyjs_api
+        properties:
+          service_url: '${default-url}'
+  - name: store_ui
+    type: html5
+    path: store_ui
+    requires:
+      - name: tinyjs_api
+        group: destinations
+        properties:
+          name: booksjs_be
+          url: '~{service_url}'
+
+resources:
+  - name: bookstore_db
+    type: com.sap.xs.hdi-container
+
+  - name: hdi-container
+    properties:
+       hdi-container-name: ${service-name}
+    type: com.sap.xs.hdi-container
+

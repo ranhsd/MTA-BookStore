@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="New Book">
+		<beginButton>
+			<Button text="Cancel" press="onCancelBookCreation"/>
+		</beginButton>
+		<endButton>
+			<Button text="Done" type="Emphasized" press="onCreateBook" enabled="{/doneButtonActive}"/>
+		</endButton>
+		<content>
+			<VBox width="100%" direction="Column" displayInline="true">
+				<items>
+					<Input width="100%" value="{/bookName}" placeholder="{/bookNamePlaceholder}"/>
+					<Input width="100%" value="{/authorName}" placeholder="{/authorNamePlaceholder}"/>
+					<Input width="100%" value="{/isbn}" placeholder="{/isbnPlaceholder}"/>
+					<Input width="100%" value="{/price}" placeholder="{/pricePlaceholder}"/>
+				</items>
+			</VBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="bookstore.db::BestSeller" applyPrivilegeType="NONE" dataCategory="DEFAULT" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="BestSeller"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="bookstore.db::store.Author">
+    <resourceUri>bookstore.db::store.Author</resourceUri>
+  </DataSource>
+  <DataSource id="bookstore.db::store.Book">
+    <resourceUri>bookstore.db::store.Book</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="authorId" aggregationType="sum">
+        <descriptions defaultDescription="authorId"/>
+      </viewAttribute>
+      <viewAttribute id="authorName">
+        <descriptions defaultDescription="authorName"/>
+      </viewAttribute>
+      <viewAttribute id="numberOfBooks" aggregationType="sum">
+        <descriptions defaultDescription="numberOfBooks"/>
+      </viewAttribute>
+      <viewAttribute id="bookName">
+        <descriptions defaultDescription="bookName"/>
+      </viewAttribute>
+      <viewAttribute id="isbn">
+        <descriptions defaultDescription="isbn"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="bookstore.db::store.Author">
+      <mapping xsi:type="Calculation:AttributeMapping" target="authorId" source="authorId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="authorName" source="authorName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="numberOfBooks" source="numberOfBooks"/>
+    </input>
+    <input node="bookstore.db::store.Book">
+      <mapping xsi:type="Calculation:AttributeMapping" target="bookName" source="bookName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="isbn" source="isbn"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="authorId" source="authorId"/>
+    </input>
+    <filter>&quot;numberOfBooks&quot; &gt; 2</filter>
+    <joinAttribute name="authorId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="authorId" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="authorId"/>
+      <keyMapping columnObjectName="Join_1" columnName="authorId"/>
+    </attribute>
+    <attribute id="authorName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="authorName"/>
+      <keyMapping columnObjectName="Join_1" columnName="authorName"/>
+    </attribute>
+    <attribute id="numberOfBooks" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="numberOfBooks"/>
+      <keyMapping columnObjectName="Join_1" columnName="numberOfBooks"/>
+    </attribute>
+    <attribute id="bookName" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="bookName"/>
+      <keyMapping columnObjectName="Join_1" columnName="bookName"/>
+    </attribute>
+    <attribute id="isbn" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="isbn"/>
+      <keyMapping columnObjectName="Join_1" columnName="isbn"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="239"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="bookstore.db::store.Author" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="bookstore.db::store.Book" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

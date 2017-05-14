@@ -1,0 +1,25 @@
+namespace bookstore.db;
+
+context store {
+    entity Author {
+        key authorId      : Integer     not null;
+            authorName    : String(100) not null;
+            numberOfBooks : Integer     default 0;
+            AuthorBooks   : association[1, 0..*] to Book { authorId };
+    }
+
+    entity Book {
+        key bookId        : Integer     not null;
+        key authorId      : Integer     not null;
+            isbn          : String(20)  not null;
+            bookName      : String(100) not null;
+            price         : Integer     not null;
+            priceCurrency : String(10)  not null;
+            authorName    : String(100);
+    };
+
+    // entity BookPurchase {
+    //     key bookId       : Integer not null;
+    //     key purchaseId   : Integer not null;
+    // }
+};

@@ -1,0 +1,51 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="default">
+            <EntityType Name="AuthorType">
+                <Key>
+                    <PropertyRef Name="authorId"/>
+                </Key>
+                <Property Name="authorId" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="authorName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="numberOfBooks" Type="Edm.Int32"/>
+                <Property Name="AuthorBooks.authorId" Type="Edm.Int64"/>
+                <NavigationProperty Name="books" Relationship="default.AuthorBooksType" FromRole="AuthorPrincipal" ToRole="BookDependent"/>
+            </EntityType>
+            <EntityType Name="BookType">
+                <Key>
+                    <PropertyRef Name="isbn"/>
+                </Key>
+                <Property Name="isbn" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="100"/>
+                <Property Name="authorId" Type="Edm.Int64"/>
+            </EntityType>
+            <EntityType Name="BestSellerType">
+                <Key>
+                    <PropertyRef Name="objectId"/>
+                </Key>
+                <Property Name="objectId" Type="Edm.String" Nullable="false" MaxLength="2147483647"/>
+                <Property Name="authorId" Type="Edm.Int64"/>
+                <Property Name="authorName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="numberOfBooks" Type="Edm.Int32"/>
+            </EntityType>
+            <Association Name="AuthorBooksType">
+                <End Type="default.AuthorType" Role="AuthorPrincipal" Multiplicity="1"/>
+                <End Type="default.BookType" Role="BookDependent" Multiplicity="*"/>
+            </Association>
+            <EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Author" EntityType="default.AuthorType"/>
+                <EntitySet Name="Book" EntityType="default.BookType"/>
+                <EntitySet Name="BestSeller" EntityType="default.BestSellerType"/>
+                <AssociationSet Name="AuthorBooks" Association="default.AuthorBooksType">
+                    <End Role="AuthorPrincipal" EntitySet="Author"/>
+                    <End Role="BookDependent" EntitySet="Book"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

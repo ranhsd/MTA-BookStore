@@ -1,0 +1,7 @@
+service {
+ "bookstore.db::store.Author" as "Author" navigates ("AuthorBooks" as "books");
+ "bookstore.db::store.Book" as "Book" create using "xsjs:bookCreateMethod.xsjslib::createBook";
+ 
+ "bookstore.db::BestSeller" as "BestSeller" keys generate local "objectId";
+  association "AuthorBooks" principal "Author"("authorId") multiplicity "1" dependent "Book"("authorId") multiplicity "*";
+}

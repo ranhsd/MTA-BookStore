@@ -1,0 +1,11 @@
+{ 
+  "format_version": 1, 
+  "imports": 
+  [ { 
+		"target_table": "bookstore.db::store.BookPurchase", 
+		"source_data" : { "data_type" : "CSV", "file_name" : "bookstore.db::bookPurchase.csv", "has_header" : true }, 
+		"import_settings" : { "import_columns" : ["purchaseId", "bookId" ] }, 
+		"column_mappings" : {"purchaseId": 1, "bookId" : 2	} 
+	} 
+  ] 
+}
